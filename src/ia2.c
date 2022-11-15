@@ -8,8 +8,12 @@
 int main(int argc, char** argv)
 {
 	int arr[ARR_SIZE];
-	fill_array_rand_range(ARR_SIZE, arr, MAX_VALUE);
-	print_array(ARR_SIZE, arr);
+	if (!fill_array_rand_range(ARR_SIZE, arr, MAX_VALUE)) {
+		perror("Error filling the array!");
+		return 1;
+	}
+
+	print_array_int(ARR_SIZE, arr);
 
 	int res = avg_array_int(ARR_SIZE, arr);
 	if (res == INT_MIN){

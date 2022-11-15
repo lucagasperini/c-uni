@@ -5,7 +5,26 @@
 #include <sys/types.h>
 #include <time.h>
 
-int fill_array_rand_range(int sz, int *arr, int max)
+int reverse_array_int(int sz, int* arr)
+{
+	if (sz <= 0)
+		return 0;
+	if (arr == NULL)
+		return 0;
+	
+	int i = 0;
+	int tmp;
+	while (i < sz - i) {
+		tmp = arr[i];
+		arr[i] = arr[sz - 1 - i];
+		arr[sz - 1 - i] = tmp;
+		i++;
+	}
+
+	return i;
+}
+
+int fill_array_rand_range(int sz, int* arr, int max)
 {
 	if (sz <= 0)
 		return 0;
@@ -23,7 +42,7 @@ int fill_array_rand_range(int sz, int *arr, int max)
 	return i;
 }
 
-int print_array(int sz, int *arr)
+int print_array_int(int sz, const int *arr)
 {
 	if (sz <= 0)
 		return 0;
@@ -42,7 +61,7 @@ int print_array(int sz, int *arr)
 	return i;
 }
 
-int min_array_index(int sz, int *arr)
+int min_array_int_index(int sz, const int *arr)
 {
 	if (sz <= 0)
 		return -1;
@@ -65,7 +84,7 @@ int min_array_index(int sz, int *arr)
 	return index;
 }
 
-int max_array_index(int sz, int *arr)
+int max_array_int_index(int sz, const int *arr)
 {
 	if (sz <= 0)
 		return -1;
@@ -89,25 +108,25 @@ int max_array_index(int sz, int *arr)
 }
 
 
-int min_array_value(int sz, int *arr)
+int min_array_int_value(int sz, const int *arr)
 {
-	int index = min_array_index(sz, arr);
+	int index = min_array_int_index(sz, arr);
 	if(index == -1)
 		return INT_MIN;
 
 	return arr[index];
 }
 
-int max_array_value(int sz, int *arr)
+int max_array_int_value(int sz, const int *arr)
 {
-	int index = min_array_index(sz, arr);
+	int index = min_array_int_index(sz, arr);
 	if(index == -1)
 		return INT_MAX;
 	return arr[index];
 }
 
 
-int avg_array_int(int sz, int* arr)
+int avg_array_int(int sz, const int* arr)
 {
 	if(sz <= 0)
 		return INT_MIN;

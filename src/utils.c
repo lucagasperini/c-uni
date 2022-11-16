@@ -298,3 +298,14 @@ const int* desc_sorted_int_sub(int sz, const int* arr, int* len)
 
 	return out_ptr;
 }
+
+int check_string_numeric_positive(const char* str)
+{
+	for(; *str; str++) {
+		if(*str < '0' || *str > '9') {
+			return 0;
+		}
+	}
+
+	return 1;
+}

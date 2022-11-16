@@ -140,4 +140,28 @@ const int* asc_sorted_int_sub(int sz, const int* arr, int* len);
  */
 const int* desc_sorted_int_sub(int sz, const int* arr, int* len);
 
+/**
+ * @brief Check if the string is numeric (only > 0)
+ * 
+ * @param str char array zero terminated to check
+ * @return int 0 if string has some non numeric char, else 1 
+ */
+int check_string_numeric_positive(const char* str);
+
+/**
+ * @brief Check if the string is numeric
+ * 
+ * @param str char array zero terminated to check
+ * @return int 0 if string has some non numeric char, else 1 
+ */
+static inline int check_string_numeric(const char* str)
+{
+	if (*str == '-') {
+		str++;
+	}
+	
+	return check_string_numeric_positive(str);
+}
+
+
 #endif

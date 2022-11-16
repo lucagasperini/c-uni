@@ -12,7 +12,7 @@
  * @param arr Interger pointer of the array, cannot be NULL
  * @return uint Size of the longest increasing sorted subarray, if invalid argument 0
  */
-uint len_asc_sorted_sub(int sz, const int* arr);
+static inline uint len_asc_sorted_sub(int sz, const int* arr);
 
 /**
  * @brief Find the longest descending sorted subarray on the array
@@ -21,7 +21,7 @@ uint len_asc_sorted_sub(int sz, const int* arr);
  * @param arr Interger pointer of the array, cannot be NULL
  * @return uint Size of the longest descending sorted subarray, if invalid argument 0
  */
-uint len_desc_sorted_sub(int sz, const int* arr);
+static inline uint len_desc_sorted_sub(int sz, const int* arr);
 
 int main(int argc, char** argv)
 {
@@ -63,78 +63,22 @@ int main(int argc, char** argv)
 	return 0;
 }
 
-uint len_asc_sorted_sub(int sz, const int* arr)
+static inline uint len_asc_sorted_sub(int sz, const int* arr)
 {
-	if (sz <= 0) 
+	int len;
+	if(asc_sorted_int_sub(sz, arr, &len) == NULL) {
 		return 0;
-	if (arr == NULL)
-		return 0;
-
-	// starting point is zero
-	// ending point is one (to get end - 1)
-	// length is zero, just because we can check if all values are equal
-	int start = 0, end = 1, len = 0;
-
-	while (end < sz) {
-		// if where are decreasing then record distance (end - start)
-		if(arr[end - 1] > arr[end]) {
-			// if distance is bigger than previous distance, then substitute it
-			if(end - start > len) {
-				len = end - start;
-			}
-			// fix the new starting point
-			start = end;
-		}
-		// go ahead
-		end++;
+	} else {
+		return len;
 	}
-
-	// if the longest subarray is at the end, remember to check it and update it
-	if(end - start > len) {
-		len = end - start;
-	}
-
-	// handling special case all values are equal
-	if(len == 0)
-		return sz;
-
-	return len;
 }
 
-uint len_desc_sorted_sub(int sz, const int* arr)
+static inline uint len_desc_sorted_sub(int sz, const int* arr)
 {
-	if (sz <= 0) 
+	int len;
+	if(desc_sorted_int_sub(sz, arr, &len) == NULL) {
 		return 0;
-	if (arr == NULL)
-		return 0;
-
-	// starting point is zero
-	// ending point is one (to get end - 1)
-	// length is zero, just because we can check if all values are equal
-	int start = 0, end = 1, len = 0;
-
-	while (end < sz) {
-		// if where are increasing then record distance (end - start)
-		if(arr[end - 1] < arr[end]) {
-			// if distance is bigger than previous distance, then substitute it
-			if(end - start > len) {
-				len = end - start;
-			}
-			// fix the new starting point
-			start = end;
-		}
-		// go ahead
-		end++;
+	} else {
+		return len;
 	}
-
-	// if the longest subarray is at the end, remember to check it and update it
-	if(end - start > len) {
-		len = end - start;
-	}
-
-	// handling special case all values are equal
-	if(len == 0)
-		return sz;
-
-	return len;
 }

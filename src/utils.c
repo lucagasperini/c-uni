@@ -77,23 +77,60 @@ int reverse_array_int(int sz, int* arr)
 	return i;
 }
 
-int fill_array_rand_range(int sz, int* arr, int max)
+size_t fill_array_rand_range(size_t sz, int* arr, int min, int max)
 {
-	if (sz <= 0)
+	if (sz == 0)
+		return 0;
+	if (arr == NULL)
+		return 0;
+	if(max <= min)
+		return 0;
+
+	srand(time(NULL));
+
+	size_t i = 0;
+	while(i < sz)
+		arr[i++] = (rand() % (max - min)) + min;
+	
+	return i;
+}
+
+size_t fill_array_rand_range_zero(size_t sz, int* arr, int max)
+{
+	if (sz == 0)
 		return 0;
 	if (arr == NULL)
 		return 0;
 	if (max <= 0)
 		return 0;
 
-	srand(time(NULL));
-
-	int i = 0;
+	size_t i = 0;
 	while(i < sz)
 		arr[i++] = rand() % max;
 	
 	return i;
 }
+
+size_t fill_array_rand_range_sign(size_t sz, int* arr, int max)
+{
+	if (sz == 0)
+		return 0;
+	if (arr == NULL)
+		return 0;
+	if (max <= 0)
+		max *= -1; 
+
+
+	size_t i = 0;
+	int sign;
+	while(i < sz) {
+		sign = rand() & 0x1 ? -1 : 1;
+		arr[i++] = sign * rand() % max;
+	}
+
+	return i;
+}
+
 
 int print_array_int(int sz, const int *arr)
 {

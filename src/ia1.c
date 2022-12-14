@@ -1,6 +1,8 @@
 
 #include "utils.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 #define ARR_SIZE 10
 #define MAX_VALUE 1024
@@ -8,7 +10,10 @@
 int main(int argc, char** argv)
 {
         int arr[ARR_SIZE];
-	if(!fill_array_rand_range(ARR_SIZE, arr, MAX_VALUE)) {
+	
+	srand(time(NULL));
+	
+	if(!fill_array_rand_range_zero(ARR_SIZE, arr, MAX_VALUE)) {
 		perror("Error filling the array!");
 		return 1;
 	}

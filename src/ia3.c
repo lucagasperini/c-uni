@@ -1,6 +1,8 @@
 #include "utils.h"
 #include <stdio.h>
 #include <sys/types.h>
+#include <stdlib.h>
+#include <time.h>
 
 #define ARR_SIZE 9
 #define MAX_VALUE 20
@@ -10,30 +12,33 @@
  * 
  * @param sz Size of the integer array, cannot be <= 0
  * @param arr Interger pointer of the array, cannot be NULL
- * @return uint Size of the longest increasing sorted subarray, if invalid argument 0
+ * @return unsigned int Size of the longest increasing sorted subarray, if invalid argument 0
  */
-static inline uint len_asc_sorted_sub(int sz, const int* arr);
+static inline unsigned int len_asc_sorted_sub(int sz, const int* arr);
 
 /**
  * @brief Find the longest descending sorted subarray on the array
  * 
  * @param sz Size of the integer array, cannot be <= 0
  * @param arr Interger pointer of the array, cannot be NULL
- * @return uint Size of the longest descending sorted subarray, if invalid argument 0
+ * @return unsigned int Size of the longest descending sorted subarray, if invalid argument 0
  */
-static inline uint len_desc_sorted_sub(int sz, const int* arr);
+static inline unsigned int len_desc_sorted_sub(int sz, const int* arr);
 
 int main(int argc, char** argv)
 {
 	int arr[ARR_SIZE];
-	if (!fill_array_rand_range(ARR_SIZE, arr, MAX_VALUE)) {
+	
+	srand(time(NULL));
+
+	if (!fill_array_rand_range_zero(ARR_SIZE, arr, MAX_VALUE)) {
 		perror("Error filling the array!");
 		return 1;
 	}
 
 	print_array_int(ARR_SIZE, arr);
 
-	uint res_asc = len_asc_sorted_sub(ARR_SIZE, arr);
+	unsigned int res_asc = len_asc_sorted_sub(ARR_SIZE, arr);
 	if(!res_asc) {
 		perror("Error finding longest ascending subarray");
 		return 1;
@@ -46,7 +51,7 @@ int main(int argc, char** argv)
 
 	print_array_int(ARR_SIZE, arr);
 
-	uint res_desc = len_desc_sorted_sub(ARR_SIZE, arr);
+	unsigned int res_desc = len_desc_sorted_sub(ARR_SIZE, arr);
 	if(!res_desc) {
 		perror("Error finding longest descending subarray");
 		return 1;
@@ -63,7 +68,7 @@ int main(int argc, char** argv)
 	return 0;
 }
 
-static inline uint len_asc_sorted_sub(int sz, const int* arr)
+static inline unsigned int len_asc_sorted_sub(int sz, const int* arr)
 {
 	int len;
 	if(asc_sorted_int_sub(sz, arr, &len) == NULL) {
@@ -73,7 +78,7 @@ static inline uint len_asc_sorted_sub(int sz, const int* arr)
 	}
 }
 
-static inline uint len_desc_sorted_sub(int sz, const int* arr)
+static inline unsigned int len_desc_sorted_sub(int sz, const int* arr)
 {
 	int len;
 	if(desc_sorted_int_sub(sz, arr, &len) == NULL) {

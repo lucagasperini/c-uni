@@ -1,6 +1,4 @@
-#ifndef UNI_UTILS_H
-#define UNI_UTILS_H
-
+#pragma once
 #include <stddef.h>
 
 /**
@@ -55,15 +53,37 @@ int cmp_reverse_array_int(int sz, const int* a1, const int* a2);
  * @return int Number of elements reversed on array, if invalid arguments 0
  */
 int reverse_array_int(int sz, int* arr);
+
+/**
+ * @brief Takes an integer array and fill it with a N as random value where min <= N < max
+ * 
+ * @param sz Size of the integer array
+ * @param arr Interger pointer of the array, cannot be NULL
+ * @param max Maximum value on the array
+ * @param min Minimum value on the array
+ * @return size_t Number of elements filled on array, if invalid arguments 0
+ */
+size_t fill_array_rand_range(size_t sz, int* arr, int min, int max);
+
+/**
+ * @brief Takes an integer array and fill it with a N as random value where -max < N < max
+ * 
+ * @param sz Size of the integer array
+ * @param arr Interger pointer of the array, cannot be NULL
+ * @param max Maximum (and Minimum negative) value on the array, dont care if positive or negative
+ * @return size_t Number of elements filled on array, if invalid arguments 0
+ */
+size_t fill_array_rand_range_sign(size_t sz, int* arr, int max);
+
 /**
  * @brief Takes an integer array and fill it with a N as random value where 0 <= N < max
  * 
- * @param sz Size of the integer array, cannot be <= 0
+ * @param sz Size of the integer array
  * @param arr Interger pointer of the array, cannot be NULL
  * @param max Maximum value on the array, cannot be <= 0
- * @return int Number of elements filled on array, if invalid arguments 0
+ * @return size_t Number of elements filled on array, if invalid arguments 0
  */
-int fill_array_rand_range(int sz, int* arr, int max);
+size_t fill_array_rand_range_zero(size_t sz, int* arr, int max);
 
 /**
  * @brief Print an array of integer
@@ -162,6 +182,3 @@ static inline int check_string_numeric(const char* str)
 	
 	return check_string_numeric_positive(str);
 }
-
-
-#endif

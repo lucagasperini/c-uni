@@ -1,42 +1,95 @@
 #include "utils.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 
-unsigned long long fib_recursive(unsigned long long n)
+typedef int linked_list_data;
+
+#define LINKED_LIST_ALLOC 1024
+
+struct linked_list_node {
+        linked_list_data data;
+        void* next;
+};
+
+struct linked_list {
+        struct linked_list_node* head;
+        size_t num;
+        //size_t chunk;
+        //linked_list_data* ptr;
+};
+
+void linked_list_init(struct linked_list* ll)
 {
-        if (n == 1)
-                return 1;
-        else if (n == 0)
-                return 0;
-        else
-                return fib_recursive(n-2) + fib_recursive(n-1);
+        ll->head = NULL;
+        ll->num = 0;
+        //ll->chunk = LINKED_LIST_ALLOC;
+        //ll->ptr = (linked_list_node*)malloc(ll->chunk * sizeof(linked_list_node));
 }
 
-unsigned long long fib_dynamic(unsigned long long n)
+struct linked_list_node* linked_list_node_init(linked_list_data value)
 {
-        unsigned long long fib_list[n + 1];
+        struct linked_list_node* n = (struct linked_list_node*)malloc(sizeof(struct linked_list_node));
+        n->next = NULL;
+        n->data = value;
+}
 
-        for(unsigned long long i = 0; i <= n; i++) {
-                if(i == 0)
-                        fib_list[i] = 0;
-                else if(i == 1)
-                        fib_list[i] = 1;
-                else
-                        fib_list[i] = fib_list[i - 2] + fib_list[i - 1];
+
+struct linked_list_node* linked_list_last_node(struct linked_list* ll)
+{
+        struct linked_list_node* current = ll->head;
+        if(!current) 
+                return NULL;
+
+        while(current->next) {
+                current = current->next;
+        }
+        return current;
+}
+
+void linked_list_append(struct linked_list* ll, linked_list_data value)
+{
+        struct linked_list_node* last = linked_list_last_node(ll);
+        if(last == NULL) {
+                ll->head = linked_list_node_init(value);
+                ll->num = 1;
+        } else {
+                last->next = linked_list_node_init(value);
+                ll->num++;
+        }
+}
+
+void linked_list_delete(struct linked_list* ll, linked_list_data value)
+{
+        struct linked_list_node* current = ll->head;
+        if(!current) 
+                return;
+
+        struct linked_list_node* next;
+
+        while(next = current->next) {
+                current = current->next;
+        }
+        return current;
+        
+
+}
+
+struct linked_list_node* linked_list_search(struct linked_list* ll, linked_list_data value)
+{
+        struct linked_list_node* current = ll->head;
+        if(!current) 
+                return NULL;
+
+        while(current && current->data != value) {
+                current = current->next;
         }
 
-        return fib_list[n];
+        return current;
 }
 
 int main(int argc, char** argv)
 {
-        unsigned long long res = fib_recursive(10);
-
-        printf("%lld\n", res);
-
-        res = fib_dynamic(10);
-        printf("%lld\n", res);
-
 
         return 0;
 }

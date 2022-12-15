@@ -62,7 +62,7 @@ void bubble_sort_int(size_t sz, int* arr)
         }
 }
 
-static void _merge_arr(int* left, int* right)
+static void s_merge_arr(int* left, int* right)
 {
         //TODO
 }
@@ -79,6 +79,41 @@ void merge_sort_int(size_t sz, int* arr)
         if(sz > 2) {
                 merge_sort_int(half_left, arr);
                 merge_sort_int(half_right, arr + half_left);
+        } else {
+                if(arr[0] > arr[1]) {
+                        int swap = arr[0];
+                        arr[0] = arr[1];
+                        arr[1] = swap;
+                }
+        }
+        
+}
+
+static void s_quicksort_partition(int* arr, size_t low, size_t high)
+{
+        
+}
+
+static void s_quicksort(int* arr, size_t low, size_t high)
+{
+        if(low < high) {
+                s_quicksort_partition(arr, low, high);
+
+        }
+}
+
+void quick_sort_int(size_t sz, int* arr)
+{
+        size_t half_left = sz / 2;
+        int pivot = arr[half_left];
+
+        if(sz == 0 || sz == 1) 
+                return;
+
+
+        if(sz > 2) {
+                merge_sort_int(half_left, arr);
+                //merge_sort_int(half_right, arr + half_left);
         } else {
                 if(arr[0] > arr[1]) {
                         int swap = arr[0];

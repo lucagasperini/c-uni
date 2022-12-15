@@ -22,3 +22,9 @@ add_test(test_ia_extra01 ia_extra01)
 
 add_executable (ia_extra02 ia_extra02.c ${C_FILE_UTILS})
 add_test(test_ia_extra02 ia_extra02)
+
+add_executable (ia_extra03 ia_extra03.c ${C_FILE_UTILS})
+add_test(test_ia_extra03 ia_extra03)
+
+add_executable (ia_extra04 ia_extra04.c ${C_FILE_UTILS})
+add_test(test_ia_extra04 ia_extra04)

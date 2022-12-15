@@ -70,7 +70,7 @@ void linked_list_delete(struct linked_list* ll, linked_list_data value)
         while(next = current->next) {
                 current = current->next;
         }
-        return current;
+        return;
         
 
 }

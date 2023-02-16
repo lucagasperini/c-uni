@@ -462,6 +462,7 @@ struct binary_tree_queue_node_data_t dequeue_binary_tree_queue_t(struct binary_t
         return data;
 }
 
+// Breadth-First Search into the tree
 void print_binary_tree_node(struct binary_tree_node_t* node)
 {
         size_t level_counter = 0;

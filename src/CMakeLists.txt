@@ -28,3 +28,12 @@ add_test(test_ia_extra03 ia_extra03)
 
 add_executable (ia_extra04 ia_extra04.c ${C_FILE_UTILS})
 add_test(test_ia_extra04 ia_extra04)
+
+add_executable (ia_extra05 ia_extra05.c ${C_FILE_UTILS})
+add_test(test_ia_extra05 ia_extra05)
+
+add_executable (ce_es24 ce_es24.c ${C_FILE_UTILS})
+add_test(test_ce_es24 ce_es24)
+
+add_executable (binary_tree binary_tree.c ${C_FILE_UTILS})
+add_test(test_binary_tree binary_tree)

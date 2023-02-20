@@ -213,30 +213,7 @@ void quicksort(sort_t* arr, size_t n)
         s_quicksort(arr, 0, n - 1);
 }
 
-/*/
-void quick_sort_int(size_t sz, sort_t* arr)
-{
-        size_t half_left = sz / 2;
-        sort_t pivot = arr[half_left];
 
-        if(sz == 0 || sz == 1) 
-                return;
-
-
-        if(sz > 2) {
-                merge_sort_int(half_left, arr);
-                //merge_sort_int(half_right, arr + half_left);
-        } else {
-                if(arr[0] > arr[1]) {
-                        sort_t swap = arr[0];
-                        arr[0] = arr[1];
-                        arr[1] = swap;
-                }
-        }
-        
-}
-
-*/
 
 int main(int argc, char** argv)
 {
@@ -248,34 +225,34 @@ int main(int argc, char** argv)
 
         fill_array_rand_range_sign(ARR_SIZE, arr, MAX_VALUE);
 
-/*
+
         if(!print_array_int(ARR_SIZE, arr)) {
                 perror("Error printing array!");
                 return 1;
         }
-*/
+
         if(!copy_array_int(ARR_SIZE, arr, a1)) {
                 return 1;
         }
 
         insert_sort_int(ARR_SIZE, a1);
-/*
+
         if(!print_array_int(ARR_SIZE, a1)) {
                 perror("Error printing array!");
                 return 1;
         }
-*/
+
         if(!copy_array_int(ARR_SIZE, arr, a2)) {
                 return 1;
         }
 
         selection_sort_int(ARR_SIZE, a2);
-/*
+
         if(!print_array_int(ARR_SIZE, a2)) {
                 perror("Error printing array!");
                 return 1;
         }
-*/
+
         if(!cmp_array_int(ARR_SIZE, a1, a2)) {
                 perror("[INSERT/SELECTION] Array are not equal");
                 return 1;
@@ -284,12 +261,12 @@ int main(int argc, char** argv)
         copy_array_int(ARR_SIZE, arr, a2);
 
         bubble_sort(ARR_SIZE, a2);
-/*
+
         if(!print_array_int(ARR_SIZE, a2)) {
                 perror("Error printing array!");
                 return 1;
         }
-*/
+
         if(!cmp_array_int(ARR_SIZE, a1, a2)) {
                 perror("[INSERT/BUBBLE] Array are not equal");
                 return 1;

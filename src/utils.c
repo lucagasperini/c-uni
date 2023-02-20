@@ -103,6 +103,8 @@ size_t fill_array_rand_range_zero(size_t sz, int* arr, int max)
 		return 0;
 	if (max <= 0)
 		return 0;
+	
+	srand(time(NULL));
 
 	size_t i = 0;
 	while(i < sz)
@@ -119,7 +121,8 @@ size_t fill_array_rand_range_sign(size_t sz, int* arr, int max)
 		return 0;
 	if (max <= 0)
 		max *= -1; 
-
+	
+	srand(time(NULL));
 
 	size_t i = 0;
 	int sign;

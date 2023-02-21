@@ -37,3 +37,6 @@ add_test(test_ce_es24 ce_es24)
 
 add_executable (binary_tree binary_tree.c ${C_FILE_UTILS})
 add_test(test_binary_tree binary_tree)
+
+add_executable (heap heap.c ${C_FILE_UTILS})
+add_test(test_heap heap)

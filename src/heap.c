@@ -29,6 +29,20 @@ void init_max_heap_alloc(struct max_heap* heap, size_t alloc)
         heap->items = 0;
 }
 
+void free_heap_item(struct heap_item* item)
+{
+        free(item);
+}
+
+void free_heap(struct heap_item** root, size_t alloc)
+{
+        for(size_t i = 0; i < alloc; i++) {
+                free_heap_item(root[i]);
+        }
+
+        free(root);
+}
+
 struct heap_item** realloc_heap(struct heap_item** root, size_t alloc)
 {
         if(root) {
@@ -148,6 +162,14 @@ void build_max_heap(struct max_heap* heap, struct heap_item** arr, size_t num)
         }
 }
 
+struct heap_item* remove_max_heap(struct max_heap* heap)
+{
+        swap_heap_item(heap->root, 0, --heap->items);
+        restore_max_heap(heap, 0);
+
+        return heap->root[heap->items];
+}
+
 void sort_max_heap(struct max_heap* heap)
 {
         size_t keep_items = heap->items;
@@ -173,6 +195,7 @@ void print_heap(struct heap_item** root, size_t num)
                         level = (level + 1) * 2;
                 }
         }
+        putchar('\n');
 }
 
 int main(int argc, char** argv)
@@ -198,6 +221,34 @@ int main(int argc, char** argv)
 
 
         print_heap(heap.root, heap.items);
+
+        printf("%d\n", remove_max_heap(&heap)->index);
+        
+        remove_max_heap(&heap);
+        remove_max_heap(&heap);
+        remove_max_heap(&heap);
+        remove_max_heap(&heap);
+        remove_max_heap(&heap);
+        remove_max_heap(&heap);
+        remove_max_heap(&heap);
+        remove_max_heap(&heap);
+        remove_max_heap(&heap);
+        remove_max_heap(&heap);
+
+
+        print_heap(heap.root, heap.items);
+
+        insert_max_heap(&heap, 10, 10);
+        insert_max_heap(&heap, 43, 10);
+        insert_max_heap(&heap, 54, 10);
+        insert_max_heap(&heap, 34, 10);
+        insert_max_heap(&heap, 22, 10);
+        insert_max_heap(&heap, 25, 10);
+        insert_max_heap(&heap, 87, 10);
+        insert_max_heap(&heap, 11, 10);
+        insert_max_heap(&heap, 100, 10);
+        insert_max_heap(&heap, 40, 10);
+        insert_max_heap(&heap, 8, 10);
 
         sort_max_heap(&heap);
 

@@ -43,6 +43,12 @@ void free_heap(struct heap_item** root, size_t alloc)
         free(root);
 }
 
+void free_max_heap(struct max_heap* heap)
+{
+        free_heap(heap->root, heap->alloc);
+        init_max_heap(heap);
+}
+
 struct heap_item** realloc_heap(struct heap_item** root, size_t alloc)
 {
         if(root) {
@@ -253,6 +259,8 @@ int main(int argc, char** argv)
         sort_max_heap(&heap);
 
         print_heap(heap.root, heap.items);
+
+        free_max_heap(&heap);
 
         return 0;
 }

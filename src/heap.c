@@ -191,6 +191,28 @@ void sort_max_heap(struct max_heap* heap)
         heap->items = keep_items;
 }
 
+struct heap_item* search_max_heap(struct max_heap* heap, heap_index index)
+{
+        if(heap->root == NULL) {
+                return NULL;
+        }
+
+        // if index is bigger of max index (root), then cant find that item 
+        if(heap->root[0]->index < index) {
+                return NULL;
+        }
+
+        // just doing linear search, can be improved
+        for(size_t i = 0; i < heap->items; i++) {
+                if(heap->root[i]->index == index) {
+                        return heap->root[i];
+                }
+        }
+
+        // cant find this index
+        return NULL;
+}
+
 void print_heap(struct heap_item** root, size_t num)
 {
         size_t level = 0;
@@ -255,6 +277,18 @@ int main(int argc, char** argv)
         insert_max_heap(&heap, 100, 10);
         insert_max_heap(&heap, 40, 10);
         insert_max_heap(&heap, 8, 10);
+
+        struct heap_item* item = NULL;
+        item = search_max_heap(&heap, 8);
+        printf("%d\n", item != NULL ? item->index : -1);
+        item = search_max_heap(&heap, 11);
+        printf("%d\n", item != NULL ? item->index : -1);
+        item = search_max_heap(&heap, 22);
+        printf("%d\n", item != NULL ? item->index : -1);
+        item = search_max_heap(&heap, 34);
+        printf("%d\n", item != NULL ? item->index : -1);
+        item = search_max_heap(&heap, 354);
+        printf("%d\n", item != NULL ? item->index : -1);
 
         sort_max_heap(&heap);
 

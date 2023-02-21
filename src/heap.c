@@ -73,6 +73,11 @@ size_t right_child_heap(size_t item)
         return left_child_heap(item) + 1;
 }
 
+size_t last_node_heap(size_t heap_items)
+{
+        return (heap_items - 2) / 2;
+}
+
 void swap_heap_item(struct heap_item** root, size_t i1, size_t i2)
 {
         struct heap_item* tmp = root[i1];
@@ -103,15 +108,27 @@ void insert_max_heap(struct max_heap* heap, heap_index index, heap_value value)
 
 void restore_max_heap(struct max_heap* heap, size_t i)
 {
-        while(i < heap->items) {
+        if(heap->items <= 1) {
+                return;
+        }
+
+        const size_t last_node = last_node_heap(heap->items);
+        while(i <= last_node) {
                 size_t i_left = left_child_heap(i);
                 size_t i_right = right_child_heap(i);
-                size_t i_max_child = heap->root[i_left]->index > heap->root[i_right]->index ? i_left : i_right;
+                // max is left
+                size_t i_max_child = i_left;
+                // but if we have a right child, check if max is the right child
+                if(i_right < heap->items)
+                        i_max_child = heap->root[i_left]->index > heap->root[i_right]->index ? i_left : i_right;
+
+                // if max child is bigger than parent, then swap
                 if(heap->root[i]->index < heap->root[i_max_child]->index) {
                         swap_heap_item(heap->root, i, i_max_child);
-                } else {
+                } else { // otherwise exit
                         return;
                 }
+                // now parent is at max child position
                 i = i_max_child;
         }
 }
@@ -123,7 +140,7 @@ void build_max_heap(struct max_heap* heap, struct heap_item** arr, size_t num)
         heap->alloc = num;
 
         // index of last no-leaf element
-        size_t last_node = (num - 2) / 2;
+        size_t last_node = last_node_heap(num);
 
         // restore all no-leaf element (leaf element are already max heap)
         for(size_t i = last_node; i >= 0; i--) {
@@ -179,6 +196,10 @@ int main(int argc, char** argv)
         insert_max_heap(&heap, 40, 10);
         insert_max_heap(&heap, 8, 10);
 
+
+        print_heap(heap.root, heap.items);
+
+        sort_max_heap(&heap);
 
         print_heap(heap.root, heap.items);
 

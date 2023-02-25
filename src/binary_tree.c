@@ -521,23 +521,25 @@ int main(int argc, char** argv)
         insert_binary_tree(&t, 333, 10);
         insert_binary_tree(&t, 269, 10);
 
+        puts("Current tree:");
+
         print_binary_tree(&t);
+
+        puts("Removing 66:");
 
         remove_binary_tree(&t, 66);
+
+        print_binary_tree(&t);
+
+        puts("Removing 65:");
+
         remove_binary_tree(&t, 65);
-        remove_binary_tree(&t, 100);
 
         print_binary_tree(&t);
 
-        remove_binary_tree(&t, 50);
+        puts("Removing 300:");
 
-        print_binary_tree(&t);
-
-        remove_binary_tree(&t, 64);
-        remove_binary_tree(&t, 269);
-        print_binary_tree(&t);
         remove_binary_tree(&t, 300);
-        remove_binary_tree(&t, 333);
         print_binary_tree(&t);
 
         binary_tree_index_t max = max_binary_tree(&t)->index;
